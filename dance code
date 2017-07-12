@@ -1,0 +1,90 @@
+#include "Servo.h";
+
+int leftMotor1 = 4;
+int leftMotor2 = 3;
+int rightMotor1 = 2;
+int rightMotor2 = 5;
+int leftspeedPin = 9;
+int rightspeedPin = 10;
+Servo leftarm;
+Servo rightarm;
+Servo head;
+int ledPin = 7;
+int soundPin = A0;
+int buttonpin = 8;
+
+void setup() {
+  // put your setup code here, to run once:
+pinMode(leftMotor1, OUTPUT);
+pinMode(leftMotor2, OUTPUT);
+pinMode(rightMotor1, OUTPUT);
+pinMode(rightMotor2, OUTPUT);
+pinMode(leftspeedPin, OUTPUT);
+pinMode(rightspeedPin, OUTPUT);
+pinMode(soundPin, INPUT);
+pinMode(ledPin, OUTPUT);
+pinMode(buttonpin,INPUT);
+Serial.begin(9600);
+
+
+//head servo
+head.attach(A1);
+head.write(45);
+
+
+//leftarm servo
+leftarm.attach(A2);
+leftarm.write(45);
+
+//rightarm servo
+rightarm.attach(A3);
+rightarm.write(45);
+
+
+}
+
+
+void Servo_Function(void)
+{
+  int x = 0;
+  while (x < 15)
+  {
+for( int angle = 0; angle <= 90; angle++)
+{
+  head.write(angle);
+  leftarm.write(angle);
+  rightarm.write(angle);
+  delay(20);
+  }
+
+  
+for( int angle = 90; angle <= 0; angle--)
+{
+  head.write(angle);
+  leftarm.write(angle);
+  rightarm.write(angle);
+  delay(20);
+  }
+
+x++;  
+}
+
+}
+
+
+void loop() {
+  
+bool buttonState;
+buttonState = digitalRead(buttonpin);
+int test = 0;
+/*
+if (buttonState == 1)
+{
+  test = 3;
+}
+
+
+if (test == 3)
+{
+   
+*/
